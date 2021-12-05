@@ -33,8 +33,8 @@ $DiscordWebhookURL = "YOURWEBHOOKHERE";
 $townID = "YOURAPEXTOWNIDHERE";
 $APIKEY = "APEXAPIKEYHERE";
 
-
-function send_to_discord($cite){
+function send_to_discord($cite)
+{
     $json_data = json_encode([
     // Message
     "content" => "Automatic Bench Warrant",
@@ -42,91 +42,50 @@ function send_to_discord($cite){
     "username" => "Deskuty Dave",
     // Avatar URL.
     // Uncoment to replace image set in webhook
-    //"avatar_url" => 
+    //"avatar_url" =>
     // Text-to-speech
     "tts" => false,
     // File upload
     // "file" => "",
     // Embeds Array
-    "embeds" => [
-        [
-            // Embed Title
-            "title" => "Automatic Bench Warrant",
-            // Embed Type
-            "type" => "rich",
-            // Embed Description
-            "description" => $cite['summoryOfCharges'],
-            // Timestamp of embed must be formatted as ISO8601
-            "timestamp" => date("c", strtotime("now")),
-            // Embed left border color in HEX
-            "color" => "12320855",
-            // Author
-            "author" => [
-                "name" => "A Warrant has been issued for: " . $cite['name']
-            ],
-            // Additional Fields array
-            "fields" => [
-                // Field 1
-                [
-                    "name" => "SL Username",
-                    "value" => $cite['slUsername'],
-                    "inline" => true
-                ],
-                // Field 2
-                [
-                    "name" => "Date of Birth",
-                    "value" => $cite['dateOfBirth'],
-                    "inline" => true
-                ],
-                [
-                    "name" => "Gender",
-                    "value" => $cite['sex'],
-                    "inline" => true
-                ],
-                [
-                    "name" => "Species",
-                    "value" => $cite['race'],
-                    "inline" => true
-                ],
-                [
-                    "name" => "Eye Color",
-                    "value" => $cite['eyeColor'],
-                    "inline" => true
-                ],
-                [
-                    "name" => "Hair Color",
-                    "value" => $cite['hairColor'],
-                    "inline" => true
-                ],
-                [
-                    "name" => "Height",
-                    "value" => $cite['height'],
-                    "inline" => true
-                ],
-                [
-                    "name" => "Weight",
-                    "value" => $cite['weight'],
-                    "inline" => true
-                ]
-                // Etc..
-            ]
-        ]
-    ]
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
-$ch = curl_init( $GLOBALS['DiscordWebhookURL']);
-curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-curl_setopt( $ch, CURLOPT_POST, 1);
-curl_setopt( $ch, CURLOPT_POSTFIELDS, $json_data);
-curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt( $ch, CURLOPT_HEADER, 0);
-curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
-$response = curl_exec( $ch );
-// If you need to debug, or find out why you can't send message uncomment line below, and execute script.
-// echo $response;
-curl_close( $ch );
+    "embeds" => [[
+    // Embed Title
+    "title" => "Automatic Bench Warrant",
+    // Embed Type
+    "type" => "rich",
+    // Embed Description
+    "description" => $cite['summoryOfCharges'],
+    // Timestamp of embed must be formatted as ISO8601
+    "timestamp" => date("c", strtotime("now")) ,
+    // Embed left border color in HEX
+    "color" => "12320855",
+    // Author
+    "author" => ["name" => "A Warrant has been issued for: " . $cite['name']],
+    // Additional Fields array
+    "fields" => [
+    // Field 1
+    ["name" => "SL Username", "value" => $cite['slUsername'], "inline" => true],
+    // Field 2
+    ["name" => "Date of Birth", "value" => $cite['dateOfBirth'], "inline" => true], ["name" => "Gender", "value" => $cite['sex'], "inline" => true], ["name" => "Species", "value" => $cite['race'], "inline" => true], ["name" => "Eye Color", "value" => $cite['eyeColor'], "inline" => true], ["name" => "Hair Color", "value" => $cite['hairColor'], "inline" => true], ["name" => "Height", "value" => $cite['height'], "inline" => true], ["name" => "Weight", "value" => $cite['weight'], "inline" => true]
+    // Etc..
+    ]]]], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    $ch = curl_init($GLOBALS['DiscordWebhookURL']);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-type: application/json'
+    ));
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = curl_exec($ch);
+    // If you need to debug, or find out why you can't send message uncomment line below, and execute script.
+    // echo $response;
+    curl_close($ch);
 }
 
-function notification(){
+function notification()
+{
     $json_data = json_encode([
     // Message
     "content" => "Running ABW Routine",
@@ -140,141 +99,126 @@ function notification(){
     // File upload
     // "file" => "",
     // Embeds Array
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
-$ch = curl_init( $GLOBALS['DiscordWebhookURL'] );
-curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-curl_setopt( $ch, CURLOPT_POST, 1);
-curl_setopt( $ch, CURLOPT_POSTFIELDS, $json_data);
-curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt( $ch, CURLOPT_HEADER, 0);
-curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
-$response = curl_exec( $ch );
-// If you need to debug, or find out why you can't send message uncomment line below, and execute script.
-// echo $response;
-curl_close( $ch );
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    $ch = curl_init($GLOBALS['DiscordWebhookURL']);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-type: application/json'
+    ));
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = curl_exec($ch);
+    // If you need to debug, or find out why you can't send message uncomment line below, and execute script.
+    // echo $response;
+    curl_close($ch);
 }
 
-
-
-function create_warrant($info){
+function create_warrant($info)
+{
     echo "CREATING WARRANT";
     $citationinfo = array();
-$citationdate=date_create(NULL);
-$citationinfo['srn'] = $info->srn;
-$citationinfo['casenumber'] = "ABW" . $info->number;
-$citationinfo['slUsername'] = $info->slUsername;
-$citationinfo['name'] = $info->name;
-$citationinfo['dateOfBirth'] = $info->dateOfBirth;
-$citationinfo['cardState'] = $info->cardState;
-$citationinfo['cardNumber'] = $info->cardNumber;
-$citationinfo['sex'] = $info->sex;
-$citationinfo['race'] = $info->race;
-$citationinfo['height'] = $info->height;
-$citationinfo['weight'] = $info->weight;
-$citationinfo['eyeColor'] = $info->eyeColor;
-$citationinfo['hairColor'] = $info->hairColor;
-$citationinfo['summoryOfCharges'] = $info->charges[0]->remarks;
-$citationinfo['judgesName'] = "Automatic Bench Warrant";
-$citationinfo['townId'] = $townID;
-$citationinfo['dateIssued'] = date_format($citationdate,"c");
-$citationinfo['address'] = $info->address;
-$citationinfo['city'] = $info->city;
-$citationinfo['state'] = $info->state;
-$citationinfo['zip'] = $info->zipCode;
+    $citationdate = date_create(NULL);
+    $citationinfo['srn'] = $info->srn;
+    $citationinfo['casenumber'] = "ABW" . $info->number;
+    $citationinfo['slUsername'] = $info->slUsername;
+    $citationinfo['name'] = $info->name;
+    $citationinfo['dateOfBirth'] = $info->dateOfBirth;
+    $citationinfo['cardState'] = $info->cardState;
+    $citationinfo['cardNumber'] = $info->cardNumber;
+    $citationinfo['sex'] = $info->sex;
+    $citationinfo['race'] = $info->race;
+    $citationinfo['height'] = $info->height;
+    $citationinfo['weight'] = $info->weight;
+    $citationinfo['eyeColor'] = $info->eyeColor;
+    $citationinfo['hairColor'] = $info->hairColor;
+    $citationinfo['summoryOfCharges'] = $info->charges[0]->remarks;
+    $citationinfo['judgesName'] = "Automatic Bench Warrant";
+    $citationinfo['townId'] = $townID;
+    $citationinfo['dateIssued'] = date_format($citationdate, "c");
+    $citationinfo['address'] = $info->address;
+    $citationinfo['city'] = $info->city;
+    $citationinfo['state'] = $info->state;
+    $citationinfo['zip'] = $info->zipCode;
 
+    $curl = curl_init();
 
-
-$curl = curl_init();
-
-curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://www.apexdesignssl.com/api/towncontrol/Warrant/Create/'. $townID,
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_POSTFIELDS =>'{
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://www.apexdesignssl.com/api/towncontrol/Warrant/Create/' . $townID,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => '{
     "townId": "' . $citationinfo['townId'] . '",
     "srn": "' . $citationinfo['srn'] . '",
     "caseNumber": "' . $citationinfo['casenumber'] . '",
-    "slUsername": "'. $citationinfo['slUsername'] .'",
-    "name": "'. $citationinfo['name'] .'",
-    "dateOfBirth": "'. $citationinfo['dateOfBirth'] .'",
-    "cardState": "'. $citationinfo['cardState'] .'",
-    "cardNumber": "'. $citationinfo['cardNumber'] .'",
-    "sex": "'. $citationinfo['sex'] .'",
-    "race": "'. $citationinfo['race'] .'",
-    "height": '. $citationinfo['height'] .',
-    "weight": '. $citationinfo['weight'] .',
-    "eyeColor": "'. $citationinfo['eyeColor'] .'",
-    "hairColor": "'. $citationinfo['hairColor'] .'",
-    "address": "'. $citationinfo['address'] .'",
-    "city": "'. $citationinfo['city'] .'",
-    "state":"'. $citationinfo['state'] .'",
-    "zip": "'. $citationinfo['zip'] .'",
-    "summaryOfCharges": "'. $citationinfo['summoryOfCharges'] .'",
-    "judgesName": "'. $citationinfo['judgesName'] .'",
-    "dateIssued": "'. $citationinfo['dateIssued'] .'",
+    "slUsername": "' . $citationinfo['slUsername'] . '",
+    "name": "' . $citationinfo['name'] . '",
+    "dateOfBirth": "' . $citationinfo['dateOfBirth'] . '",
+    "cardState": "' . $citationinfo['cardState'] . '",
+    "cardNumber": "' . $citationinfo['cardNumber'] . '",
+    "sex": "' . $citationinfo['sex'] . '",
+    "race": "' . $citationinfo['race'] . '",
+    "height": ' . $citationinfo['height'] . ',
+    "weight": ' . $citationinfo['weight'] . ',
+    "eyeColor": "' . $citationinfo['eyeColor'] . '",
+    "hairColor": "' . $citationinfo['hairColor'] . '",
+    "address": "' . $citationinfo['address'] . '",
+    "city": "' . $citationinfo['city'] . '",
+    "state":"' . $citationinfo['state'] . '",
+    "zip": "' . $citationinfo['zip'] . '",
+    "summaryOfCharges": "' . $citationinfo['summoryOfCharges'] . '",
+    "judgesName": "' . $citationinfo['judgesName'] . '",
+    "dateIssued": "' . $citationinfo['dateIssued'] . '",
     "extraditable": false,
     "executed": false,
     "bondPaid": false,
     "finePaid": false
 }',
-  CURLOPT_HTTPHEADER => array(
-    "token: ". $APIKEY,
-    'Content-Type: application/json'
-  ),
-));
+        CURLOPT_HTTPHEADER => array(
+            "token: " . $APIKEY,
+            'Content-Type: application/json'
+        ) ,
+    ));
 
-$response = curl_exec($curl);
-$httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    $response = curl_exec($curl);
+    $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-curl_close($curl);
-echo $response;
+    curl_close($curl);
+    echo $response;
 
-
-
-
-
-
-
-
-
-
-send_to_discord($citationinfo);
+    send_to_discord($citationinfo);
 }
-
-
-
 
 date_default_timezone_set("UTC");
 
-$date=date_create(NULL);
+$date = date_create(NULL);
 //echo date_format($date,"c");
-
 $date->modify('-15 days');
 
 $date2 = date_create(NULL);
 $date2->modify('-14 days');
 $now = new DateTime();
 
-
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://www.apexdesignssl.com/api/towncontrol/Citation/List/' . $townID,
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'GET',
-  CURLOPT_HTTPHEADER => array(
-    'token: '. $APIKEY,
-  ),
+    CURLOPT_URL => 'https://www.apexdesignssl.com/api/towncontrol/Citation/List/' . $townID,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'GET',
+    CURLOPT_HTTPHEADER => array(
+        'token: ' . $APIKEY,
+    ) ,
 ));
 
 $response = curl_exec($curl);
@@ -283,13 +227,15 @@ curl_close($curl);
 
 notification();
 $d1 = json_decode($response);
-foreach($d1 as $query){
-  $issueddate = new DateTime($query->issued);
-if ($issueddate > $date & $issueddate < $date2 & $query->status == "ACTIVE") {
-   echo "OK FOUND : " . $query->name;
-   create_warrant($query);
-  }
- 
+foreach ($d1 as $query)
+{
+    $issueddate = new DateTime($query->issued);
+    if ($issueddate > $date & $issueddate < $date2 & $query->status == "ACTIVE")
+    {
+        echo "OK FOUND : " . $query->name;
+        create_warrant($query);
+    }
+
 }
 
 ?>
