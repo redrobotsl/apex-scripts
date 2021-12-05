@@ -135,7 +135,7 @@ function create_warrant($info)
     $citationinfo['hairColor'] = $info->hairColor;
     $citationinfo['summoryOfCharges'] = $info->charges[0]->remarks;
     $citationinfo['judgesName'] = "Automatic Bench Warrant";
-    $citationinfo['townId'] = $townID;
+    $citationinfo['townId'] = $GLOBALS['townID'];
     $citationinfo['dateIssued'] = date_format($citationdate, "c");
     $citationinfo['address'] = $info->address;
     $citationinfo['city'] = $info->city;
@@ -145,7 +145,7 @@ function create_warrant($info)
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://www.apexdesignssl.com/api/towncontrol/Warrant/Create/' . $townID,
+        CURLOPT_URL => 'https://www.apexdesignssl.com/api/towncontrol/Warrant/Create/' . $GLOBALS['townID'],
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -181,7 +181,7 @@ function create_warrant($info)
     "finePaid": false
 }',
         CURLOPT_HTTPHEADER => array(
-            "token: " . $APIKEY,
+            "token: " . $GLOBALS['APIKEY'],
             'Content-Type: application/json'
         ) ,
     ));
@@ -208,7 +208,7 @@ $now = new DateTime();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://www.apexdesignssl.com/api/towncontrol/Citation/List/' . $townID,
+    CURLOPT_URL => 'https://www.apexdesignssl.com/api/towncontrol/Citation/List/' . $GLOBALS['townID'],
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -217,7 +217,7 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'GET',
     CURLOPT_HTTPHEADER => array(
-        'token: ' . $APIKEY,
+        'token: ' . $GLOBALS['APIKEY'],
     ) ,
 ));
 
